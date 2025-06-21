@@ -2,18 +2,18 @@ package Vista;
 
 import Modelo.Documentos.OrdenTrabajo;
 import Modelo.Usuarios.Técnico;
-import Modelo.Usuarios.Usuario;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
 public class Sp_AsignarOrdenesVista extends JFrame {
-    private JComboBox<OrdenTrabajo> comboOrdenes;
+    private JTable tablaOrdenes;
     private JComboBox<Técnico> comboTecnicos;
     private JButton btnAsignar;
 
-    public Sp_AsignarOrdenesVista(List<OrdenTrabajo> ordenes, List<Usuario> tecnicos) {
+    public Sp_AsignarOrdenesVista(List<OrdenTrabajo> ordenes, List<Técnico> tecnicos) {
         setTitle("Asignar Orden de Trabajo - Supervisor");
         setSize(900, 500);
         setLocationRelativeTo(null);
@@ -47,46 +47,54 @@ public class Sp_AsignarOrdenesVista extends JFrame {
         panelIzquierdo.add(subtitulo);
         panelIzquierdo.add(descripcion);
 
-        // Panel derecho con formulario
-        JPanel panelDerecho = new JPanel(new GridBagLayout());
+        // Panel derecho con tabla y formulario
+        JPanel panelDerecho = new JPanel(new BorderLayout());
         panelDerecho.setBackground(Color.WHITE);
-        panelDerecho.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        panelDerecho.setBorder(BorderFactory.createEmptyBorder(40, 10, 40, 40));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(20, 10, 20, 10);
-        gbc.anchor = GridBagConstraints.WEST;
+        DefaultTableModel modelo = new DefaultTableModel(
+                new Object[]{"ID", "Descripción", "Nivel", "Fecha"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        for (OrdenTrabajo ot : ordenes) {
+            modelo.addRow(new Object[]{
+                    ot.getId(),
+                    ot.getDescripcion(),
+                    ot.getNivel(),
+                    ot.getFecha()
+            });
+        }
 
-        JLabel lblOrden = new JLabel("Orden de Trabajo:");
-        comboOrdenes = new JComboBox<>(ordenes.toArray(new OrdenTrabajo[0]));
+        tablaOrdenes = new JTable(modelo);
+        tablaOrdenes.setRowHeight(24);
+        JScrollPane scroll = new JScrollPane(tablaOrdenes);
+        scroll.setBorder(BorderFactory.createTitledBorder("Órdenes sin asignar"));
 
-        JLabel lblTecnico = new JLabel("Técnico:");
         comboTecnicos = new JComboBox<>(tecnicos.toArray(new Técnico[0]));
-
         btnAsignar = new JButton("Asignar");
         btnAsignar.setPreferredSize(new Dimension(120, 40));
+        JPanel pie = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 5));
+        pie.add(comboTecnicos);
+        pie.add(btnAsignar);
 
-        gbc.gridx = 0; gbc.gridy = 0;
-        panelDerecho.add(lblOrden, gbc);
-        gbc.gridx = 1;
-        panelDerecho.add(comboOrdenes, gbc);
-
-        gbc.gridx = 0; gbc.gridy = 1;
-        panelDerecho.add(lblTecnico, gbc);
-        gbc.gridx = 1;
-        panelDerecho.add(comboTecnicos, gbc);
-
-        gbc.gridx = 1; gbc.gridy = 2;
-        panelDerecho.add(btnAsignar, gbc);
+        panelDerecho.add(scroll, BorderLayout.CENTER);
+        panelDerecho.add(pie, BorderLayout.SOUTH);
 
         btnAsignar.addActionListener(e -> {
-            OrdenTrabajo orden = (OrdenTrabajo) comboOrdenes.getSelectedItem();
+            int fila = tablaOrdenes.getSelectedRow();
             Técnico tecnico = (Técnico) comboTecnicos.getSelectedItem();
 
-            if (orden != null && tecnico != null) {
+            if (fila >= 0 && tecnico != null) {
+                OrdenTrabajo orden = ordenes.get(fila);
                 orden.setUsuarioAsignado(tecnico);
-                JOptionPane.showMessageDialog(this, "Orden asignada correctamente a " + tecnico.getNombre());
+                JOptionPane.showMessageDialog(this,
+                        "Orden asignada correctamente a " + tecnico.getNombre());
             } else {
-                JOptionPane.showMessageDialog(this, "Seleccione una orden y un técnico.");
+                JOptionPane.showMessageDialog(this,
+                        "Seleccione una orden y un técnico.");
             }
         });
 
