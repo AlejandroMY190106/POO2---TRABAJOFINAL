@@ -1,15 +1,15 @@
-package vista;
+package Vista;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SupervisorVista extends JFrame {
+public class Sp_SupervisorVista extends JFrame {
     private JButton btnVerAlertas;
     private JButton btnAsignarOrden;
     private JButton btnVerReportes;
     private JButton btnCerrarSesion;
 
-    public SupervisorVista() {
+    public Sp_SupervisorVista() {
         setTitle("Supervisor - Sistema de Mantenimiento Estructural");
         setSize(900, 500);
         setLocationRelativeTo(null);

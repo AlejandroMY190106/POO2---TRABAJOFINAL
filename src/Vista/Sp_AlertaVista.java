@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 import Modelo.Documentos.Alerta;
 
@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class AlertaVista extends JFrame {
+public class Sp_AlertaVista extends JFrame {
     private JTable tablaAlertas;
     private DefaultTableModel modeloTabla;
 
-    public AlertaVista(List<Alerta> alertas) {
+    public Sp_AlertaVista(List<Alerta> alertas) {
         setTitle("Alertas - Sistema de Mantenimiento Estructural");
         setSize(600, 400);
         setLocationRelativeTo(null);

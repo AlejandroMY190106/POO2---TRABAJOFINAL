@@ -1,14 +1,14 @@
-package vista;
+package Vista;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TecnicoVista extends JFrame {
+public class Tc_TecnicoVista extends JFrame {
     private JButton btnVerAlertas;
     private JButton btnVerOrdenes;
     private JButton btnCerrarSesion;
 
-    public TecnicoVista() {
+    public Tc_TecnicoVista() {
         setTitle("Técnico - Sistema de Mantenimiento Estructural");
         setSize(900, 500);
         setLocationRelativeTo(null);

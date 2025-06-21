@@ -1,14 +1,14 @@
-package vista;
+package Vista;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class AdministradorVista extends JFrame {
+public class Ad_AdministradorVista extends JFrame {
     private JButton btnGestionarUsuarios;
     private JButton btnVerReportes;
     private JButton btnCerrarSesion;
 
-    public AdministradorVista() {
+    public Ad_AdministradorVista() {
         setTitle("Administrador - Sistema de Mantenimiento Estructural");
         setSize(900, 500);
         setLocationRelativeTo(null);

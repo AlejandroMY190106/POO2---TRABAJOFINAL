@@ -1,4 +1,4 @@
-package vista;
+package Vista;
 
 import Modelo.Documentos.OrdenTrabajo;
 
@@ -7,10 +7,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class VerOrdenesTecnicoVista extends JFrame {
+public class Tc_VerOrdenesVista extends JFrame {
     private JTable tablaOrdenes;
 
-    public VerOrdenesTecnicoVista(List<OrdenTrabajo> ordenesDelTecnico) {
+    public Tc_VerOrdenesVista(List<OrdenTrabajo> ordenesDelTecnico) {
         setTitle("Órdenes Asignadas - Técnico");
         setSize(900, 500);
         setLocationRelativeTo(null);
@@ -74,5 +74,8 @@ public class VerOrdenesTecnicoVista extends JFrame {
 
         add(panelIzquierdo, BorderLayout.WEST);
         add(panelDerecho, BorderLayout.CENTER);
+
     }
+
+
 }

@@ -1,16 +1,16 @@
-package vista;
+package Vista;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GestionarUsuariosVista extends JFrame {
+public class Ad_GestionarUsuariosVista extends JFrame {
     private JButton btnRegistrar;
     private JButton btnConsultar;
     private JButton btnActualizar;
     private JButton btnEliminar;
     private JButton btnVolver;
 
-    public GestionarUsuariosVista() {
+    public Ad_GestionarUsuariosVista() {
         setTitle("Gestión de Usuarios - Administrador");
         setSize(900, 500);
         setLocationRelativeTo(null);
