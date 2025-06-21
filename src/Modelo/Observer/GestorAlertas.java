@@ -2,12 +2,18 @@ package Modelo.Observer;
 
 import Modelo.Documentos.Alerta;
 import Modelo.Estructura.Estado;
+import Modelo.Repository.AlertaArchivoRepository;
 
 public class GestorAlertas implements ObservadorEstado {
     private Alerta alertaActual;
+    private final AlertaArchivoRepository repo = new AlertaArchivoRepository();
 
     public void crearAlerta(String mensaje, String nivel) {
         alertaActual = new Alerta(1, mensaje, nivel);
+        // Imprimir en consola
+        System.out.println("ALERTA [" + nivel + "]: " + mensaje);
+        // Guardar en el archivo en tiempo real
+        repo.guardar(alertaActual);
     }
 
     @Override
