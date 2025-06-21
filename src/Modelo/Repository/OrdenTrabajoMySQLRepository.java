@@ -167,4 +167,15 @@ public class OrdenTrabajoMySQLRepository implements OrdenTrabajoRepository {
         }
         return lista;
     }
+    @Override
+    public void eliminar(int id) {
+        String sql = "DELETE FROM orden_trabajo WHERE id = ?";
+        try (Connection conn = ConnectionMySQL.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

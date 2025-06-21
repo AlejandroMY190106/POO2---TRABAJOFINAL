@@ -82,7 +82,6 @@ public class Controlador {
         gu.getBtnRegistrar().addActionListener(e -> mostrarCrearUsuario());
         gu.getBtnConsultar().addActionListener(e -> mostrarVisualizarUsuarios());
         gu.getBtnActualizar().addActionListener(e -> preguntarYActualizar());
-        gu.getBtnEliminar().addActionListener(e -> mostrarEliminarUsuario());
         gu.getBtnVolver().addActionListener(e -> {
             gu.dispose();
             adminVista.setVisible(true);
@@ -124,20 +123,6 @@ public class Controlador {
         v.setVisible(true);
     }
 
-    private void mostrarEliminarUsuario() {
-        List<Usuario> lista = usuarioRepo.obtenerTodos();
-        Ad_EliminarUsuarioVista v = new Ad_EliminarUsuarioVista(lista);
-        v.getBtnEliminar().addActionListener(e -> {
-            int fila = v.getTabla().getSelectedRow();
-            if (fila >= 0) {
-                int id = (int) v.getTabla().getValueAt(fila, 0);
-                usuarioRepo.eliminar(id);
-                ((javax.swing.table.DefaultTableModel) v.getTabla().getModel()).removeRow(fila);
-            }
-        });
-        v.getBtnCerrar().addActionListener(e -> v.dispose());
-        v.setVisible(true);
-    }
 
     private void preguntarYActualizar() {
         String idStr = JOptionPane.showInputDialog("ID del usuario a actualizar:");
@@ -196,11 +181,12 @@ v.setVisible(true);
     }
 
     /* ================================ TÉCNICO ============================== */
-    private void mostrarTecnico(Técnico tec) {
+        private void mostrarTecnico(Técnico tec) {
         tecnicoVista = new Tc_TecnicoVista();
         tecnicoVista.getBtnVerOrdenes().addActionListener(e -> {
             List<OrdenTrabajo> ord = ordenRepo.obtenerPorUsuario(tec.getId());
-            new Tc_VerOrdenesVista(ord).setVisible(true);
+            Tc_VerOrdenesVista v = new Tc_VerOrdenesVista(ord);
+            v.setVisible(true);
         });
         tecnicoVista.getBtnVerAlertas().addActionListener(e -> mostrarAlertas());
         tecnicoVista.getBtnCerrarSesion().addActionListener(e -> {

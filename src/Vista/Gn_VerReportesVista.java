@@ -25,14 +25,14 @@ public class Gn_VerReportesVista extends JFrame {
 
         /* ---------- Tabla de reportes ---------- */
         DefaultTableModel modelo = new DefaultTableModel(
-                new Object[]{"ID", "Orden", "Fecha", "Inspecciones"}, 0) {
+                new Object[]{"ID", "Descripción", "Fecha", "Inspecciones"}, 0) {
             @Override public boolean isCellEditable(int r, int c) { return false; }
         };
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (Reporte r : reportes) {
             modelo.addRow(new Object[]{
                     r.getId(),
-                    r.getOrdenTrabajo() != null ? r.getOrdenTrabajo().getId() : "-",
+                    r.getContenido(),
                     sdf.format(r.getFecha()),
                     r.getInspecciones() != null ? r.getInspecciones().size() : 0
             });

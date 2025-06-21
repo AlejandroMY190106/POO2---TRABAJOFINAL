@@ -8,4 +8,5 @@ public interface OrdenTrabajoRepository {
     List<OrdenTrabajo> obtenerTodas();
     OrdenTrabajo buscarPorId(int id);
     List<OrdenTrabajo> obtenerPorUsuario(int usuarioId);
+    void eliminar(int id);
 }

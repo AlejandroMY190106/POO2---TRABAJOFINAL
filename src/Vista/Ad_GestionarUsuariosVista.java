@@ -7,7 +7,6 @@ public class Ad_GestionarUsuariosVista extends JFrame {
     private JButton btnRegistrar;
     private JButton btnConsultar;
     private JButton btnActualizar;
-    private JButton btnEliminar;
     private JButton btnVolver;
 
     public Ad_GestionarUsuariosVista() {
@@ -53,10 +52,9 @@ public class Ad_GestionarUsuariosVista extends JFrame {
         btnRegistrar = crearBoton("Registrar Usuario");
         btnConsultar = crearBoton("Consultar Usuario");
         btnActualizar = crearBoton("Actualizar Usuario");
-        btnEliminar = crearBoton("Eliminar Usuario");
         btnVolver = crearBoton("Volver al Menú", true);
 
-        for (JButton btn : new JButton[]{btnRegistrar, btnConsultar, btnActualizar, btnEliminar, btnVolver}) {
+        for (JButton btn : new JButton[]{btnRegistrar, btnConsultar, btnActualizar, btnVolver}) {
             btn.setAlignmentX(Component.CENTER_ALIGNMENT);
             panelOpciones.add(btn);
             panelOpciones.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -105,6 +103,5 @@ public class Ad_GestionarUsuariosVista extends JFrame {
     public JButton getBtnRegistrar() { return btnRegistrar; }
     public JButton getBtnConsultar() { return btnConsultar; }
     public JButton getBtnActualizar() { return btnActualizar; }
-    public JButton getBtnEliminar() { return btnEliminar; }
     public JButton getBtnVolver() { return btnVolver; }
 }
