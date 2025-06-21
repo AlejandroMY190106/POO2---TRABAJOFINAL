@@ -9,6 +9,7 @@ import Vista.*;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Controlador principal que enlaza todas las vistas del proyecto.
@@ -181,8 +182,15 @@ public class Controlador {
 
     private void mostrarAsignarOrden() {
         List<OrdenTrabajo> ordenes = ordenRepo.obtenerTodas();
-        List<Usuario> tecnicos = usuarioRepo.obtenerPorTipo("TÉCNICO");
-        Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(ordenes, tecnicos);
+        List<OrdenTrabajo> sinAsignar = ordenes.stream()
+                .filter(o -> o.getUsuarioAsignado() == null)
+                .collect(Collectors.toList());
+        List<Usuario> usuariosTec = usuarioRepo.obtenerPorTipo("TÉCNICO");
+        List<Técnico> tecnicos = usuariosTec.stream()
+                .filter(u -> u instanceof Técnico)
+                .map(u -> (Técnico) u)
+                .collect(Collectors.toList());
+        Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(sinAsignar, tecnicos);
         v.setVisible(true);
     }
 
