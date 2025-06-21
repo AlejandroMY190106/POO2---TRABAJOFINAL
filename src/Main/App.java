@@ -1,5 +1,4 @@
 package Main;
-
 import Controlador.Controlador;
 import Modelo.Estructura.ComponenteEstructural;
 import Modelo.Estructura.Estructura;
@@ -27,53 +26,57 @@ public class App {
             return;
         }
 
-        // Tomamos el primer componente existente para generar estados aleatorios
-        ComponenteEstructural componente = componentes.get(0);
+        int cantidad = Math.min(5, componentes.size());
+        componentes = componentes.subList(0, cantidad);
 
-        // Obtener y asignar la estructura a la que pertenece el componente
         try (Connection conn = ConnectionMySQL.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
                      "SELECT id_estructura FROM componente_estructural WHERE id=?")) {
-            stmt.setInt(1, componente.getId());
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                int idEstructura = rs.getInt("id_estructura");
-                EstructuraMySQLRepository estRepo = new EstructuraMySQLRepository();
-                Estructura estructura = estRepo.obtenerPorId(idEstructura);
-                componente.setEstructura(estructura);
+            EstructuraMySQLRepository estRepo = new EstructuraMySQLRepository();
+            for (ComponenteEstructural c : componentes) {
+                stmt.setInt(1, c.getId());
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    int idEstructura = rs.getInt("id_estructura");
+                    Estructura estructura = estRepo.obtenerPorId(idEstructura);
+                    c.setEstructura(estructura);
+                }
+                rs.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if (componente.getEstructura() != null) {
-            System.out.println("Componente ID " + componente.getId() + " pertenece a la estructura: "
-                    + componente.getEstructura().getNombre() + " (ID=" + componente.getEstructura().getId() + ")");
-        }
-
-        // Hilo que actualiza el estado del componente de forma aleatoria
-        Thread generador = new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                double temp = -10 + new Random().nextDouble() * 120; // -10 a 110 °C
-                double hum = new Random().nextDouble() * 100;        // 0 a 100 %
-                double cor = new Random().nextDouble() * 6;          // 0 a 6 índice
-                componente.setEstado(new Estado(temp, hum, cor));
-                if (componente.getEstructura() != null) {
-                    System.out.printf(
-                            "Estructura: %s (ID=%d) -> Nuevo estado: T=%.2f°C, H=%.2f%%, C=%.2f%n",
-                            componente.getEstructura().getNombre(),
-                            componente.getEstructura().getId(),
-                            temp, hum, cor);
-                }
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+        for (ComponenteEstructural c : componentes) {
+            if (c.getEstructura() != null) {
+                System.out.println("Componente ID " + c.getId() + " pertenece a la estructura: "
+                        + c.getEstructura().getNombre() + " (ID=" + c.getEstructura().getId() + ")");
             }
-        });
-        generador.setDaemon(true);
-        generador.start();
+
+            Thread generador = new Thread(() -> {
+                while (!Thread.currentThread().isInterrupted()) {
+                    double temp = -10 + new Random().nextDouble() * 120; // -10 a 110 °C
+                    double hum = new Random().nextDouble() * 100;        // 0 a 100 %
+                    double cor = new Random().nextDouble() * 6;          // 0 a 6 índice
+                    c.setEstado(new Estado(temp, hum, cor));
+                    if (c.getEstructura() != null) {
+                        System.out.printf(
+                                "Estructura: %s (ID=%d) - Componente ID %d -> Nuevo estado: T=%.2f°C, H=%.2f%%, C=%.2f%n",
+                                c.getEstructura().getNombre(),
+                                c.getEstructura().getId(),
+                                c.getId(),
+                                temp, hum, cor);
+                    }
+                    try {
+                        Thread.sleep(20000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            });
+            generador.setDaemon(true);
+            generador.start();
+        }
 
         new Controlador();
     }
