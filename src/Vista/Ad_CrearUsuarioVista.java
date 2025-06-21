@@ -29,13 +29,11 @@ public class Ad_CrearUsuarioVista extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
 
         /* Campos */
-        txtId         = new JTextField(15);
         txtNombre     = new JTextField(20);
         txtCorreo     = new JTextField(20);
         txtContrasena = new JPasswordField(20);
         comboRol      = new JComboBox<>(new String[]{"Administrador", "Supervisor", "Técnico"});
 
-        addLabelAndComp(form, gbc, 0, "ID:",           txtId);
         addLabelAndComp(form, gbc, 1, "Nombre:",       txtNombre);
         addLabelAndComp(form, gbc, 2, "Correo:",       txtCorreo);
         addLabelAndComp(form, gbc, 3, "Contraseña:",   txtContrasena);
@@ -109,7 +107,6 @@ public class Ad_CrearUsuarioVista extends JFrame {
     }
 
     /* ============ Getters para Controlador ============ */
-    public JTextField      getTxtId()         { return txtId; }
     public JTextField      getTxtNombre()     { return txtNombre; }
     public JTextField      getTxtCorreo()     { return txtCorreo; }
     public JPasswordField  getTxtContrasena() { return txtContrasena; }

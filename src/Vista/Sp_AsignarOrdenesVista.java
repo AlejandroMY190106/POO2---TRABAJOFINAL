@@ -73,9 +73,7 @@ public class Sp_AsignarOrdenesVista extends JFrame {
 
         tablaOrdenes = new JTable(modelo);
         tablaOrdenes.setRowHeight(24);
-
         tablaOrdenes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         JScrollPane scroll = new JScrollPane(tablaOrdenes);
         scroll.setBorder(BorderFactory.createTitledBorder("Órdenes sin asignar"));
 

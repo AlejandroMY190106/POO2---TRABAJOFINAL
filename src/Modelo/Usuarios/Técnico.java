@@ -26,5 +26,10 @@ public class Técnico extends Usuario{
     public void obtenerAlertas(List<Alerta> listaAlerta){
         alertas = listaAlerta;
     }
+
+    @Override
+    public String toString() {
+        return super.getNombre();
+    }
     
 }

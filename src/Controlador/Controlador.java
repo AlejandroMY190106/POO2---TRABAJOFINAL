@@ -94,7 +94,7 @@ public class Controlador {
         Ad_CrearUsuarioVista v = new Ad_CrearUsuarioVista();
         v.getBtnRegistrar().addActionListener(e -> {
             try {
-                int id = Integer.parseInt(v.getTxtId().getText());
+                int id = 1;
                 String nombre = v.getTxtNombre().getText();
                 String correo = v.getTxtCorreo().getText();
                 String pass = new String(v.getTxtContrasena().getPassword());
@@ -182,7 +182,6 @@ public class Controlador {
 
     private void mostrarAsignarOrden() {
         List<OrdenTrabajo> ordenes = ordenRepo.obtenerTodas();
-
         List<OrdenTrabajo> sinAsignar = ordenes.stream()
                 .filter(o -> o.getUsuarioAsignado() == null)
                 .collect(Collectors.toList());
@@ -192,18 +191,6 @@ public class Controlador {
                 .map(u -> (Técnico) u)
                 .collect(Collectors.toList());
         Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(sinAsignar, tecnicos);
-        v.setVisible(true);
-
-List<OrdenTrabajo> sinAsignar = ordenes.stream()
-                .filter(o -> o.getUsuarioAsignado() == null)
-                .toList();
-List<Usuario> usuariosTec = usuarioRepo.obtenerPorTipo("TÉCNICO");
-        List<Técnico> tecnicos = usuariosTec.stream()
-                .filter(u -> u instanceof Técnico)
-                .map(u -> (Técnico) u)
-                .toList();
-Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(sinAsignar, tecnicos);
-Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(ordenes, tecnicos);
 v.setVisible(true);
 
     }
