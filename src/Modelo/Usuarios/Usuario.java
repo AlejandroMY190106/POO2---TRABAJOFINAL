@@ -65,9 +65,12 @@ public abstract class Usuario {
         List<Usuario> usuarios = obtenerUsuarios();
         boolean verificar = false;
         for(Usuario u : usuarios){
-        if(correo == this.correo && contraseña == this.contraseña){
-        verificar = true;
-        }
+            if(correo != null && contraseña != null &&
+               correo.equals(u.getCorreo()) &&
+               contraseña.equals(u.getContrasena())){
+                verificar = true;
+                break;
+            }
         }
         return verificar;
     }
