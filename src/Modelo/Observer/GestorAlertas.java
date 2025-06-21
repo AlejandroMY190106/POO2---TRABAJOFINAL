@@ -47,9 +47,9 @@ public class GestorAlertas implements ObservadorEstado {
 
         //CORROSIÓN NORMAL MENOR A 0    
         if (corrosion >= 5.0) {
-            crearAlerta("Corrosión CRÍTICA: índice " + corrosion, "CRÍTICO");
+            crearAlerta("Corrosión CRÍTICA: " + corrosion, "CRÍTICO");
         } else if (corrosion >= 2.0) {
-            crearAlerta("Corrosión moderada: índice " + corrosion, "MEDIO");
+            crearAlerta("Corrosión moderada: " + corrosion, "MEDIO");
         }
     }
 }
