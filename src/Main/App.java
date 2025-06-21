@@ -26,7 +26,7 @@ public class App {
             return;
         }
 
-        int cantidad = Math.min(5, componentes.size());
+        int cantidad = Math.min(4, componentes.size());
         componentes = componentes.subList(0, cantidad);
 
         try (Connection conn = ConnectionMySQL.getConnection();
