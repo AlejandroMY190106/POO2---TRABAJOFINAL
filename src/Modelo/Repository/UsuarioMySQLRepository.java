@@ -183,4 +183,78 @@ public class UsuarioMySQLRepository implements UsuarioRepository {
 
         return lista;
     }
+
+    @Override
+    public Usuario buscarPorCorreo(String correo) {
+        Usuario usuario = null;
+        String sql = "SELECT * FROM usuarios WHERE correo = ?";
+        try (Connection conn = ConnectionMySQL.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, correo);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int    usuarioId   = rs.getInt("id");
+                String nombre      = rs.getString("nombre");
+                String contrasenia = rs.getString("contraseña");
+                String tipo        = rs.getString("tipo");
+                switch (tipo.toUpperCase()) {
+                    case "ADMINISTRADOR":
+                        usuario = new Administrador(usuarioId, nombre, correo, contrasenia);
+                        break;
+                    case "SUPERVISOR":
+                        usuario = new Supervisor(usuarioId, nombre, correo, contrasenia);
+                        break;
+                    case "TÉCNICO":
+                        usuario = new Técnico(usuarioId, nombre, correo, contrasenia);
+                        break;
+                    default:
+                        usuario = null;
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
+    @Override
+    public void actualizar(Usuario usuario) {
+        String sql = "UPDATE usuarios SET nombre=?, correo=?, contraseña=?, tipo=? WHERE id=?";
+        try (Connection conn = ConnectionMySQL.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getCorreo());
+            stmt.setString(3, usuario.getContrasena());
+
+            String tipo;
+            if (usuario instanceof Administrador) {
+                tipo = "ADMINISTRADOR";
+            } else if (usuario instanceof Supervisor) {
+                tipo = "SUPERVISOR";
+            } else if (usuario instanceof Técnico) {
+                tipo = "TÉCNICO";
+            } else {
+                tipo = "USUARIO";
+            }
+            stmt.setString(4, tipo);
+            stmt.setInt(5, usuario.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void eliminar(int id) {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        try (Connection conn = ConnectionMySQL.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
