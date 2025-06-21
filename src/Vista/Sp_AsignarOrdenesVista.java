@@ -5,6 +5,9 @@ import Modelo.Usuarios.Técnico;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import javax.swing.ListSelectionModel;
+
 import java.awt.*;
 import java.util.List;
 
@@ -70,6 +73,9 @@ public class Sp_AsignarOrdenesVista extends JFrame {
 
         tablaOrdenes = new JTable(modelo);
         tablaOrdenes.setRowHeight(24);
+
+        tablaOrdenes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         JScrollPane scroll = new JScrollPane(tablaOrdenes);
         scroll.setBorder(BorderFactory.createTitledBorder("Órdenes sin asignar"));
 
