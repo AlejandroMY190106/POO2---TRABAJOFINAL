@@ -19,7 +19,7 @@ public class UsuarioMySQLRepository implements UsuarioRepository {
                 "  id INT PRIMARY KEY AUTO_INCREMENT, " +
                 "  nombre VARCHAR(100) NOT NULL, " +
                 "  correo VARCHAR(150) NOT NULL, " +
-                "  contraseña VARCHAR(100) NOT NULL, " +      // ← Fíjate en la coma al final
+                "  contraseña VARCHAR(100) NOT NULL, " +
                 "  tipo VARCHAR(100) NOT NULL" +               // ← Nueva columna "tipo"
                 ")"
             );
