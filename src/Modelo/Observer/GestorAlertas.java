@@ -23,21 +23,21 @@ public class GestorAlertas implements ObservadorEstado {
         double corrosion = estado.getNivelCorrosion();
 
         //TEMPERATURA NORMAL MENOR A 50 MAYOR QUE 0
-        if (temperatura > 90) {
+        if (temperatura > 105) {
             crearAlerta("Temperatura EXCESIVA: " + temperatura + "°C", "ALTO");
-        } else if (temperatura > 70) {
+        } else if (temperatura > 90) {
             crearAlerta("Temperatura alta: " + temperatura + "°C", "MEDIO");
-        }else if (temperatura > 50) {
+        }else if (temperatura > 80) {
             crearAlerta("Temperatura moderadamente alta: " + temperatura + "°C", "BAJO");
         }else if (temperatura < 0) {
             crearAlerta("Temperatura por debajo de 0°C: " + temperatura + "°C", "MEDIO");
         }
         
         
-        //HUMEDAD NORMAL ENTRE MAYOR A 20 MENOR QUE 50
-        if (humedad > 80.0) {
+        //HUMEDAD NORMAL ENTRE MAYOR A 20 MENOR QUE 80
+        if (humedad > 95.0) {
             crearAlerta("Humedad MUY alta: " + humedad + "%", "ALTO");
-        } else if (humedad > 50.0) {
+        } else if (humedad > 80.0) {
             crearAlerta("Humedad moderada: " + humedad + "%", "MEDIO");
         } else {
             if (humedad < 20.0) {
@@ -45,10 +45,10 @@ public class GestorAlertas implements ObservadorEstado {
             }
         }
 
-        //CORROSIÓN NORMAL MENOR A 0    
-        if (corrosion >= 5.0) {
+        //CORROSIÓN NORMAL MENOR A 2   
+        if (corrosion >= 5.5) {
             crearAlerta("Corrosión CRÍTICA: " + corrosion, "CRÍTICO");
-        } else if (corrosion >= 2.0) {
+        } else if (corrosion >= 4.0) {
             crearAlerta("Corrosión moderada: " + corrosion, "MEDIO");
         }
     }
