@@ -181,16 +181,17 @@ public class Controlador {
 
     private void mostrarAsignarOrden() {
         List<OrdenTrabajo> ordenes = ordenRepo.obtenerTodas();
-        List<OrdenTrabajo> sinAsignar = ordenes.stream()
+List<OrdenTrabajo> sinAsignar = ordenes.stream()
                 .filter(o -> o.getUsuarioAsignado() == null)
                 .toList();
-        List<Usuario> usuariosTec = usuarioRepo.obtenerPorTipo("TÉCNICO");
+List<Usuario> usuariosTec = usuarioRepo.obtenerPorTipo("TÉCNICO");
         List<Técnico> tecnicos = usuariosTec.stream()
                 .filter(u -> u instanceof Técnico)
                 .map(u -> (Técnico) u)
                 .toList();
-        Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(sinAsignar, tecnicos);
-        v.setVisible(true);
+Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(sinAsignar, tecnicos);
+Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(ordenes, tecnicos);
+v.setVisible(true);
     }
 
     /* ================================ TÉCNICO ============================== */
