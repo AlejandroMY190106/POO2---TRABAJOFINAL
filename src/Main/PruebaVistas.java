@@ -17,7 +17,7 @@ import Vista.VerOrdenesTecnicoVista;
 import Vista.UpdateUserVista;
 */
 
-public class PruevaVistas {
+public class PruebaVistas {
 
     public static void main(String[] args) {
         /*
