@@ -198,7 +198,6 @@ public class Controlador {
             tecnicoVista.dispose();
             mostrarLogin();
         });
-        tecnicoVista.getBtnVerReportes().addActionListener(e -> mostrarListadoReportes());
         tecnicoVista.setVisible(true);
     }
 
