@@ -2,7 +2,6 @@ package Vista;
 
 import Modelo.Documentos.OrdenTrabajo;
 import Modelo.Usuarios.Técnico;
-import Modelo.Usuarios.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,7 @@ public class Sp_AsignarOrdenesVista extends JFrame {
     private JComboBox<Técnico> comboTecnicos;
     private JButton btnAsignar;
 
-    public Sp_AsignarOrdenesVista(List<OrdenTrabajo> ordenes, List<Usuario> tecnicos) {
+    public Sp_AsignarOrdenesVista(List<OrdenTrabajo> ordenes, List<Técnico> tecnicos) {
         setTitle("Asignar Orden de Trabajo - Supervisor");
         setSize(900, 500);
         setLocationRelativeTo(null);
