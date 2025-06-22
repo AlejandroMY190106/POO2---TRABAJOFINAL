@@ -15,8 +15,7 @@ public class ReporteMySQLRepository implements ReporteRepository {
                 "  id INT PRIMARY KEY AUTO_INCREMENT, " +
                 "  contenido TEXT NOT NULL, " +
                 "  fecha DATE NOT NULL, " +
-                "  id_orden INT NOT NULL, " +
-                "  CONSTRAINT fk_reporte_orden FOREIGN KEY (id_orden) REFERENCES orden_trabajo(id)" +
+                "  id_orden INT NOT NULL" +
                 ")"
             );
         } catch (SQLException e) {

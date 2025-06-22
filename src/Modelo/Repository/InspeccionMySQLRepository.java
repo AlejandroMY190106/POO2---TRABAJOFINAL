@@ -22,12 +22,8 @@ public class InspeccionMySQLRepository implements InspeccionRepository {
                 "  id_estructura INT NOT NULL, " +
                 "  id_usuario INT NOT NULL, " +
                 "  id_orden INT NOT NULL, " +
-                "  id_reporte INT NOT NULL, " +
-                "  CONSTRAINT fk_inspeccion_estructura FOREIGN KEY (id_estructura) REFERENCES estructuras(id), " +
-                "  CONSTRAINT fk_inspeccion_usuario   FOREIGN KEY (id_usuario)    REFERENCES usuarios(id), " +
-                "  CONSTRAINT fk_inspeccion_orden     FOREIGN KEY (id_orden)      REFERENCES orden_trabajo(id), " +
-                "  CONSTRAINT fk_inspeccion_reporte   FOREIGN KEY (id_reporte)    REFERENCES reporte(id)" +
-                ")"
+                "  id_reporte INT NOT NULL" +
+                        ")"
             );
         } catch (SQLException e) {
             e.printStackTrace();

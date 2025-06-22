@@ -19,9 +19,7 @@ public class OrdenTrabajoMySQLRepository implements OrdenTrabajoRepository {
                 "  nivel VARCHAR(20) NOT NULL, " +
                 "  fecha DATE NOT NULL, " +
                 "  id_usuario INT, " +
-                "  id_estructura INT NOT NULL, " +
-                "  CONSTRAINT fk_orden_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id), " +
-                "  CONSTRAINT fk_orden_estructura FOREIGN KEY (id_estructura) REFERENCES estructuras(id)" +
+                "  id_estructura INT NOT NULL" +
                 ")"
             );
         } catch (SQLException e) {

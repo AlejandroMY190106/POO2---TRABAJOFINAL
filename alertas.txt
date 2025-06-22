@@ -82,3 +82,21 @@
 70;Corrosión CRÍTICA: 5.670284061087916;CRÍTICO
 71;Humedad MUY baja: 8.208777501077801%;MEDIO
 71;Temperatura moderadamente alta: 103.11736362881922°C;BAJO
+72;Corrosión alta en componente ID=4;ALTO
+73;Humedad baja detectada en componente ID=3;MEDIO
+74;Corrosión alta en componente ID=4;ALTO
+75;Humedad baja detectada en componente ID=3;MEDIO
+76;Temperatura por debajo de 0°C: -7.111903752677886°C;MEDIO
+76;Temperatura por debajo de 0°C: -3.289754829908178°C;MEDIO
+77;Humedad MUY baja: 0.9226017980967227%;MEDIO
+77;Humedad MUY baja: 9.778390692095474%;MEDIO
+78;Corrosión moderada: 5.1380140699556405;MEDIO
+79;Temperatura por debajo de 0°C: -3.4188194669618133°C;MEDIO
+79;Temperatura alta: 107.59010080521202°C;MEDIO
+80;Corrosión moderada: 5.351620891990491;MEDIO
+81;Humedad MUY alta: 97.7842440329285%;ALTO
+82;Humedad MUY baja: 2.6805962291532204%;MEDIO
+83;Temperatura EXCESIVA: 108.36152050747032°C;ALTO
+84;Corrosión CRÍTICA: 5.670571545052555;CRÍTICO
+85;Humedad MUY baja: 4.5600677127282445%;MEDIO
+86;Corrosión CRÍTICA: 5.610776369348454;CRÍTICO
