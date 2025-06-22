@@ -96,6 +96,7 @@ public class Sp_AsignarOrdenesVista extends JFrame {
                 orden.setUsuarioAsignado(tecnico);
                 JOptionPane.showMessageDialog(this,
                         "Orden asignada correctamente a " + tecnico.getNombre());
+                modelo.removeRow(fila);
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Seleccione una orden y un técnico.");
