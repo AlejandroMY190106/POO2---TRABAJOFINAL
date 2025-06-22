@@ -144,6 +144,14 @@ public class GenerarBD {
                 new ArrayList<>()
         );
         ordenRepo.guardar(orden4);
+        OrdenTrabajo orden5 = new OrdenTrabajo(
+                0,
+                "Reparación de motor en Taller de Mantenimiento",
+                "ALTA",
+                new java.util.Date(),estr3,
+                new ArrayList<>()
+        );
+        ordenRepo.guardarsinUsuario(orden5);
 
         System.out.println("Órdenes de Trabajo insertadas:");
         System.out.println("  ID=" + orden1.getId() + " (Técnico ID=" + tecnico.getId()  + ", Estructura ID=" + estr1.getId() + ")");

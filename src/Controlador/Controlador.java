@@ -176,7 +176,7 @@ public class Controlador {
                 .map(u -> (Técnico) u)
                 .collect(Collectors.toList());
         Sp_AsignarOrdenesVista v = new Sp_AsignarOrdenesVista(sinAsignar, tecnicos);
-v.setVisible(true);
+    v.setVisible(true);
 
     }
 

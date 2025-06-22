@@ -18,7 +18,7 @@ public class OrdenTrabajoMySQLRepository implements OrdenTrabajoRepository {
                 "  descripcion TEXT NOT NULL, " +
                 "  nivel VARCHAR(20) NOT NULL, " +
                 "  fecha DATE NOT NULL, " +
-                "  id_usuario INT NOT NULL, " +
+                "  id_usuario INT, " +
                 "  id_estructura INT NOT NULL, " +
                 "  CONSTRAINT fk_orden_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id), " +
                 "  CONSTRAINT fk_orden_estructura FOREIGN KEY (id_estructura) REFERENCES estructuras(id)" +
@@ -55,6 +55,29 @@ public class OrdenTrabajoMySQLRepository implements OrdenTrabajoRepository {
             e.printStackTrace();
         }
     }
+    @Override
+    public void guardarsinUsuario(OrdenTrabajo orden) {
+        String sql = "INSERT INTO orden_trabajo (descripcion, nivel, fecha, id_usuario ,id_estructura) " +
+                     "VALUES (?, ?, ?, null ,?)";
+        try (Connection conn = ConnectionMySQL.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, orden.getDescripcion());
+            stmt.setString(2, orden.getNivel());
+            stmt.setDate(3, new java.sql.Date(orden.getFecha().getTime()));
+            stmt.setInt(4, orden.getEstructuraRelacionada().getId());
+
+            stmt.executeUpdate();
+
+            ResultSet rsKeys = stmt.getGeneratedKeys();
+            if (rsKeys.next()) {
+                orden.setId(rsKeys.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     
     @Override
     public List<OrdenTrabajo> obtenerTodas() {
@@ -178,4 +201,22 @@ public class OrdenTrabajoMySQLRepository implements OrdenTrabajoRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void asignarUsuario(OrdenTrabajo orden, int id) {
+    String sql = "UPDATE orden_trabajo SET id_usuario = ? WHERE id = ?";
+
+    try (Connection conn = ConnectionMySQL.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, id);              // ID del usuario a asignar
+        stmt.setInt(2, orden.getId());   // ID de la orden que se va a actualizar
+
+        stmt.executeUpdate();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 }

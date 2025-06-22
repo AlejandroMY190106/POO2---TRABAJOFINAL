@@ -5,11 +5,14 @@
 package Modelo.Documentos;
 
 import Modelo.Estructura.Estructura;
+import Modelo.Repository.OrdenTrabajoMySQLRepository;
+import Modelo.Repository.OrdenTrabajoRepository;
 import Modelo.Usuarios.Usuario;
 import java.util.Date;
 import java.util.List;
 
 public class OrdenTrabajo {
+    private final OrdenTrabajoRepository ordenRepo = new OrdenTrabajoMySQLRepository();
     private int id;
     private String descripcion;
     private String Nivel;
@@ -34,6 +37,17 @@ public class OrdenTrabajo {
         this.estructuraRelacionada = estructuraRelacionada;
         this.inspecciones = inspecciones;
     }
+
+    public OrdenTrabajo(int id, String descripcion, String Nivel, Date fecha, Estructura estructuraRelacionada, List<Inspección> inspecciones) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.Nivel = Nivel;
+        this.fecha = fecha;
+        this.estructuraRelacionada = estructuraRelacionada;
+        this.inspecciones = inspecciones;
+    }
+    
+    
 
     // GETTERS AND SETTERS
     public int getId() {
@@ -74,6 +88,8 @@ public class OrdenTrabajo {
 
     public void setUsuarioAsignado(Usuario usuarioAsignado) {
         this.usuarioAsignado = usuarioAsignado;
+        ordenRepo.asignarUsuario(this, this.usuarioAsignado.getId());
+        
     }
 
     public Estructura getEstructuraRelacionada() {
