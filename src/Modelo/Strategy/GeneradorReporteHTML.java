@@ -56,16 +56,19 @@ public class GeneradorReporteHTML implements GeneradorReporte{
                 // inspecciones: sólo IDs separados por coma
                 List<Inspección> inspecciones = r.getInspecciones();
                 StringBuilder idsInspecciones = new StringBuilder();
+                if(inspecciones != null){
                 for (int i = 0; i < inspecciones.size(); i++) {
                     idsInspecciones.append(inspecciones.get(i).getId());
                     if (i < inspecciones.size() - 1) {
                         idsInspecciones.append(", ");
                     }
+                }}else{
+                idsInspecciones.append("Sin inspecciones registradas");
                 }
                 pw.println("        <td>" + idsInspecciones.toString() + "</td>");
                 // ordenTrabajo: solo ID
                 OrdenTrabajo ot = r.getOrdenTrabajo();
-                pw.println("        <td>" + (ot == null ? "" : ot.getId()) + "</td>");
+                pw.println("        <td>" + (ot == null ? "No tiene una orden de Trabajo" : ot.getId()) + "</td>");
 
                 pw.println("      </tr>");
             }

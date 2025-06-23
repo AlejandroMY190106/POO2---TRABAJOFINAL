@@ -34,11 +34,14 @@ public class GeneradorReporteJSON implements GeneradorReporte{
                 // lista de inspecciones: arreglo de IDs
                 List<Inspección> inspecciones = r.getInspecciones();
                 pw.print("    \"inspecciones_ids\": [");
+                if(inspecciones !=null){
                 for (int j = 0; j < inspecciones.size(); j++) {
                     pw.print(inspecciones.get(j).getId());
                     if (j < inspecciones.size() - 1) {
                         pw.print(", ");
                     }
+                }}else{
+                    pw.print("null");
                 }
                 pw.println("],");
 

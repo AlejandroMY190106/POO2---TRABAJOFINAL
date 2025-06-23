@@ -32,16 +32,21 @@ public class GeneradorReporteTXT implements GeneradorReporte{
                 // 4) lista de inspecciones (sólo IDs)
                 pw.print("Inspecciones (IDs): ");
                 List<Inspección> inspecciones = r.getInspecciones();
+                if(inspecciones != null){
                 for (int i = 0; i < inspecciones.size(); i++) {
                     pw.print(inspecciones.get(i).getId());
                     if (i < inspecciones.size() - 1) {
                         pw.print(", ");
                     }
                 }
+                }else{
+                    pw.print("Sin inspecciones registradas");
+                }
+                
                 pw.println();
                 // 5) id de la orden de trabajo
                 OrdenTrabajo ot = r.getOrdenTrabajo();
-                pw.println("Orden de Trabajo (ID): " + (ot == null ? "N/A" : ot.getId()));
+                pw.println("Orden de Trabajo: " + (ot == null ? "No tiene una orden de Trabajo" : ot.getId()));
                 pw.println(); // línea en blanco para separar reportes
             }
 

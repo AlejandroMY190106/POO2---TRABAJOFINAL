@@ -2,7 +2,10 @@ package Vista;
 
 import Modelo.Documentos.Reporte;
 import Modelo.Documentos.Inspección;
+import Modelo.Strategy.*;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
@@ -65,8 +68,42 @@ public class Gn_VerDetalleReporteVista extends JFrame {
 
         JScrollPane scroll = new JScrollPane(area);
         scroll.setBorder(BorderFactory.createEmptyBorder(40, 20, 40, 40));
+        /* ---------- Panel de exportar ---------- */
+        JPanel panelExportar = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelExportar.setBackground(Color.WHITE);
+        panelExportar.setBorder(BorderFactory.createEmptyBorder(0,0,20,20));
+        JComboBox<String> comboFormato = new JComboBox<>(new String[]{"TXT", "CSV", "HTML", "JSON"});
+        JButton btnGenerar = new JButton("Generar Reporte");
+        panelExportar.add(comboFormato);
+        panelExportar.add(btnGenerar);
 
+        btnGenerar.addActionListener(ev -> {
+            GestorReporte gestor = new GestorReporte();
+            String formato = (String) comboFormato.getSelectedItem();
+            switch (formato) {
+                case "TXT": gestor.setGenerador(new GeneradorReporteTXT()); break;
+                case "CSV": gestor.setGenerador(new GeneradorReporteCSV()); break;
+                case "HTML": gestor.setGenerador(new GeneradorReporteHTML()); break;
+                case "JSON": gestor.setGenerador(new GeneradorReporteJSON()); break;
+            }
+
+            JFileChooser fc = new JFileChooser();
+            fc.setDialogTitle("Guardar Reporte");
+            int res = fc.showSaveDialog(Gn_VerDetalleReporteVista.this);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                String path = fc.getSelectedFile().getAbsolutePath();
+                int dot = path.lastIndexOf('.');
+                if (dot > 0) {
+                    path = path.substring(0, dot);
+                }
+                List<Reporte> lista = Arrays.asList(r);
+                gestor.exportar(path, lista);
+                JOptionPane.showMessageDialog(Gn_VerDetalleReporteVista.this,
+                        "Reporte generado correctamente");
+            }
+        });
         add(izq,   BorderLayout.WEST);
         add(scroll, BorderLayout.CENTER);
+        add(panelExportar, BorderLayout.SOUTH);
     }
 }
