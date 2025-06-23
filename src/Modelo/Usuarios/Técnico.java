@@ -19,10 +19,7 @@ public class Técnico extends Usuario{
         return alertas;
     }
     
-    public void asignarOrdenTrabajo(OrdenTrabajo orden){
-        //COMPLETAR
-    }
-    
+
     public void obtenerAlertas(List<Alerta> listaAlerta){
         alertas = listaAlerta;
     }

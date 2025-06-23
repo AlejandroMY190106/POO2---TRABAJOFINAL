@@ -74,8 +74,5 @@ public abstract class Usuario {
         }
         return verificar;
     }
-    
-    public void cerrarSesion(){
-        //Completar
-    }
+
 }

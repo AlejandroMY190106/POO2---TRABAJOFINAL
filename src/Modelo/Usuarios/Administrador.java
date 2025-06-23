@@ -16,7 +16,7 @@ public class Administrador extends Usuario{
     //METODOS
     public Usuario crearUsuario(int tipo, int id, String nombre, String correo, String contrasena) {
     // 1) Validar parámetros de entrada
-    if (id <= 0 ||                          // id debe ser positivo
+    if (id <= 0 ||                         
         nombre == null || nombre.isEmpty() ||
         correo == null || correo.isEmpty() ||
         contrasena == null || contrasena.isEmpty() ||
@@ -37,17 +37,11 @@ public class Administrador extends Usuario{
             // Técnico
             return new Técnico(id, nombre, correo, contrasena);
         default:
-            // (Este default nunca ocurrirá porque ya validamos tipo < 0 || tipo > 2 arriba)
             return null;
     }
 }
 
 
-    
-    public void verReportes(){
-        //COMPLETAR
-    
-    }
     
     public List<Reporte> obtenerReportes(List<Reporte> listaReportes){
         reportes = listaReportes;

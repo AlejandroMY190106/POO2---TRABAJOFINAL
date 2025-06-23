@@ -17,7 +17,7 @@ public class OrdenTrabajo {
     private String descripcion;
     private String Nivel;
     private Date fecha;
-    private Usuario usuarioAsignado;       // ← Antes era “Técnico tecnicoAsignado”
+    private Usuario usuarioAsignado; 
     private Estructura estructuraRelacionada;
     private List<Inspección> inspecciones;
 

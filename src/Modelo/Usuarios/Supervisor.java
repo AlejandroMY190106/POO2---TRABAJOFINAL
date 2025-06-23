@@ -21,9 +21,6 @@ public class Supervisor extends Usuario{
         return alertas;
     }
     
-    public void asignarOrdenTrabajo(OrdenTrabajo orden){
-        //COMPLETAR
-    }
     
     public List<Reporte> verReportes(){
     return reportes;

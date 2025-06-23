@@ -38,7 +38,6 @@ public class OrdenTrabajoMySQLRepository implements OrdenTrabajoRepository {
             stmt.setString(2, orden.getNivel());
             stmt.setDate(3, new java.sql.Date(orden.getFecha().getTime()));
 
-            // Ahora obtenemos el ID de cualquier Usuario (Técnico o Supervisor)
             Usuario u = orden.getUsuarioAsignado();
             stmt.setInt(4, u.getId());
 

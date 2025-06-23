@@ -112,8 +112,7 @@ public class InspeccionMySQLRepository implements InspeccionRepository {
                 int idReporte = rs.getInt("id_reporte");
 
                 Estructura estructura = new EstructuraMySQLRepository().obtenerPorId(idEstruct);
-                
-                // Recuperamos el usuario (será Técnico o Supervisor según el campo “tipo”)
+
                 Usuario usuario = new UsuarioMySQLRepository().buscarPorId(Integer.toString(idUsuario));
 
                 OrdenTrabajo orden = new OrdenTrabajoMySQLRepository().buscarPorId(idOrden);
@@ -153,7 +152,7 @@ public class InspeccionMySQLRepository implements InspeccionRepository {
 
                 Estructura estructura = estructuraRepo.obtenerPorId(idEstruct);
 
-                // Ya no casteamos a Técnico; el resultado puede ser Supervisor o Técnico
+  
                 Usuario usuario = usuarioRepo.buscarPorId(Integer.toString(idUsuario));
 
                 OrdenTrabajo orden    = ordenRepo.buscarPorId(idOrden);
@@ -196,7 +195,7 @@ public class InspeccionMySQLRepository implements InspeccionRepository {
 
                 Estructura estructura = estructuraRepo.obtenerPorId(idEstruct);
 
-                // Obtenemos el Usuario en lugar de castear a Técnico
+
                 Usuario usuario = usuarioRepo.buscarPorId(Integer.toString(idUsuario));
 
                 OrdenTrabajo orden    = ordenRepo.buscarPorId(idOrden);

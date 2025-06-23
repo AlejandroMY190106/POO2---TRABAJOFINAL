@@ -20,7 +20,7 @@ public class UsuarioMySQLRepository implements UsuarioRepository {
                 "  nombre VARCHAR(100) NOT NULL, " +
                 "  correo VARCHAR(150) NOT NULL, " +
                 "  contraseña VARCHAR(100) NOT NULL, " +
-                "  tipo VARCHAR(100) NOT NULL" +               // ← Nueva columna "tipo"
+                "  tipo VARCHAR(100) NOT NULL" +              
                 ")"
             );
         } catch (SQLException e) {
@@ -47,7 +47,6 @@ public class UsuarioMySQLRepository implements UsuarioRepository {
             } else if (usuario instanceof Técnico) {
                 tipo = "TÉCNICO";
             } else {
-                // Si hay alguna otra subclase o caso por defecto
                 tipo = "USUARIO";
             }
             stmt.setString(4, tipo);
