@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Tc_VerOrdenesVista extends JFrame {
     private JTable tablaOrdenes;
+    private JButton btnTerminarOrden;
     public Tc_VerOrdenesVista(List<OrdenTrabajo> ordenesDelTecnico) {
         setTitle("Órdenes Asignadas - Técnico");
         setSize(900, 500);
@@ -69,6 +70,9 @@ public class Tc_VerOrdenesVista extends JFrame {
         JScrollPane scroll = new JScrollPane(tablaOrdenes);
         scroll.setBorder(BorderFactory.createTitledBorder("Órdenes Asignadas"));
         JPanel botones = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,5));
+        btnTerminarOrden = new JButton("Terminar Orden");
+        btnTerminarOrden.setPreferredSize(new Dimension(160, 40));
+        botones.add(btnTerminarOrden);
  
         panelDerecho.add(scroll, BorderLayout.CENTER);
         panelDerecho.add(botones, BorderLayout.SOUTH);
@@ -79,6 +83,8 @@ public class Tc_VerOrdenesVista extends JFrame {
     }
 
  public JTable getTablaOrdenes() { return tablaOrdenes; }
+
+ public JButton getBtnTerminarOrden() { return btnTerminarOrden; }
 
 }
 
