@@ -201,6 +201,17 @@ public class Controlador {
         tecnicoVista.getBtnVerOrdenes().addActionListener(e -> {
             List<OrdenTrabajo> ord = ordenRepo.obtenerPorUsuario(tec.getId());
             Tc_VerOrdenesVista v = new Tc_VerOrdenesVista(ord);
+            v.getBtnTerminarOrden().addActionListener(ev -> {
+                int fila = v.getTablaOrdenes().getSelectedRow();
+                if (fila >= 0) {
+                    int id = (int) v.getTablaOrdenes().getValueAt(fila, 0);
+                    ordenRepo.eliminar(id);
+                    ((javax.swing.table.DefaultTableModel) v.getTablaOrdenes().getModel()).removeRow(fila);
+                    JOptionPane.showMessageDialog(v, "Orden terminada");
+                } else {
+                    JOptionPane.showMessageDialog(v, "Seleccione una orden");
+                }
+            });
             v.setVisible(true);
         });
         tecnicoVista.getBtnVerAlertas().addActionListener(e -> mostrarAlertas());
